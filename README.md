@@ -23,7 +23,7 @@ The value is never a command-line argument. See [docs/cli.md](docs/cli.md).
 from akie import KeyStore, OnDuplicate
 
 keys = KeyStore()
-keys.add("google/work", "sk-...")                 # raises KeyExists if it exists
+keys.add("google/work", "sk-...")  # raises KeyExists if it exists
 keys.add("google/work", "sk-...", on_duplicate=OnDuplicate.IGNORE)
 keys.get("google/work")
 ```
