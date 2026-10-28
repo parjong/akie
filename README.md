@@ -5,8 +5,22 @@ A small local store for API keys. The name comes from **API key**.
 akie only does two things: `add` a key and `get` it back. Keys live in a local
 directory on your machine.
 
-> Status: bootstrapping. The commands and the library API are not implemented
-> yet.
+## Library
+
+```python
+from akie import KeyStore, OnDuplicate
+
+keys = KeyStore()
+keys.add("google/work", "sk-...")                 # raises KeyExists if it exists
+keys.add("google/work", "sk-...", on_duplicate=OnDuplicate.IGNORE)
+keys.get("google/work")
+```
+
+Key names are `<domain>/<slug>`. The store lives in `$AKIE_HOME`, or
+`${XDG_DATA_HOME:-~/.local/share}/akie` if that is unset. The command line
+interface is not available yet.
+
+See [docs/design.md](docs/design.md) for the design decisions.
 
 ## Scope
 
