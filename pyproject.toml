@@ -29,7 +29,11 @@ line-length = 88
 target-version = "py311"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "B", "UP", "S"]
+preview = true
+explicit-preview-rules = true
+select = ["E", "F", "I", "B", "UP", "S", "PLC2701"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101", "S105", "S106"]
+# Unit tests of the private layers import akie._internal on purpose.
+"tests/internal/**" = ["PLC2701"]
