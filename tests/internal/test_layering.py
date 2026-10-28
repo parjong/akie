@@ -35,3 +35,11 @@ def test_layer_does_not_import_upward(layer: str) -> None:
                     f"{path.relative_to(SRC)} imports {module}"
                 )
             assert module != "akie", f"{path.relative_to(SRC)} imports the public API"
+
+
+def test_cli_uses_only_the_public_api() -> None:
+    for path in sorted((SRC / "cli").rglob("*.py")):
+        for module in imported_modules(path):
+            assert not module.startswith("akie._internal"), (
+                f"{path.relative_to(SRC)} imports {module}"
+            )
