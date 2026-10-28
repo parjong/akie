@@ -120,11 +120,13 @@ src/akie/
 └── _internal/           # private
     ├── core/            # errors, OnDuplicate, key names, home resolution
     ├── storage/         # manifest, StorageEngine, local engine
-    └── service/         # KeyStore
+    ├── service/         # KeyStore
+    └── cli/             # akie key add / get
 ```
 
 Dependencies only point downward: `service → storage → core`. A test enforces
-it. The CLI (added separately) is a client of the public API only.
+it. The CLI (`_internal/cli`, see [cli.md](cli.md)) is a client of the public
+API only: it imports `akie`, never `akie._internal`, and a test enforces that.
 
 The boundary is expressed with a single private directory and a re-exporting
 `__init__.py`. The alternatives considered were underscore-prefixed files,
